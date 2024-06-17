@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автоматичне збереження тексту</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #text-area {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: both; /* Дозволяє змінювати розміри мишкою */
+            overflow: auto; /* Додає прокручування, якщо вміст виходить за межі */
+        }
+    </style>
+</head>
+<body>
+    <textarea id="text-area" placeholder="Введіть текст тут..."></textarea>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textArea = document.getElementById('text-area');
+
+            // Завантаження збереженого тексту з локального сховища
+            const savedText = localStorage.getItem('savedText');
+            if (savedText) {
+                textArea.value = savedText;
+            }
+
+            // Автоматичне збереження тексту при зміні вмісту textarea
+            textArea.addEventListener('input', () => {
+                const text = textArea.value;
+                localStorage.setItem('savedText', text);
+            });
+        });
+    </script>
+</body>
+</html>
